@@ -2,7 +2,6 @@ import io
 import csv
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.decorators import permission_required
 from django.contrib import messages
 from .models import AddressBookList
 
@@ -50,7 +49,7 @@ def update_contact(request, id):
     contacts.save()
     return redirect('/')
 
-@permission_required('admin.can_add_log_entry')
+@login_required
 def contact_upload(request):
     template = "addressbook/contact_upload.html"
 
