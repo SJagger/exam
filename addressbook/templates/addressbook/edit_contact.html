@@ -1,0 +1,33 @@
+{% extends "addressbook/base.html" %}
+
+{% block content %}
+<style>
+  #contain {
+    width: 500px;
+  }
+</style>
+</div>
+  <div class="container" id="contain">
+    <h2>Address Book List Form - Edit</h2>
+    <hr>
+
+    <form action="/update_contact/{{ contacts.id }}">
+        {% csrf_token %}
+        <label class="form-group" for="fname">First Name: <b>{{ contacts.fname }}</b></label>
+        <input class="form-control" type="text" name="fname" value="{{ contacts.fname }}" placeholder="{{ contacts.fname }}" required><br>
+
+        <label class="form-group" for="lname">Last Name: <b>{{ contacts.lname }}</b></label>
+        <input class="form-control" type="text" name="lname" value="{{ contacts.lname }}" placeholder="{{ contacts.lname }}" required><br>
+
+        <label class="form-group" for="cnumber">Contact Number: <b>{{ contacts.cnumber }}</b></label>
+        <input class="form-control" type="tel" name="cnumber" value="{{ contacts.cnumber }}" placeholder="{{ contacts.cnumber }}" required><br>
+
+        <label class="form-group" for="address">Address: <b>{{ contacts.address }}</b></label>
+        <input class="form-control" type="text" name="address" value="{{ contacts.address }}" placeholder="{{ contacts.address }}" required><br>
+
+        <input type="submit" class="btn btn-primary" value="Update">
+        <a href="{% url 'addressbook-home' %}" id="cancel" name="cancel" style="color:white;" class="btn btn-warning">Back</a>
+
+    </form>
+  </div>
+{% endblock content %}
