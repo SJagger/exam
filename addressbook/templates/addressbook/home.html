@@ -31,7 +31,6 @@
       {% endif %}
     </div>
     <br>
-
     <table class="table table-light">
         <thead>
           <tr>
@@ -53,8 +52,9 @@
               <td>{{ contact.cnumber }}</td>
               <td>{{ contact.address }}</td>
               {% if user.is_authenticated %}
-                <td><a class="btn btn-info" href="/edit_contact/{{ contact.id }}">Edit</a>
-                    <a class="btn btn-danger" href="/delete_contact/{{ contact.id }}">Delete</a>
+                <td>
+                  <a class="btn btn-info" href="/edit_contact/{{ contact.id }}">Update</a>
+                  <a class="btn btn-danger" href="/delete_contact/{{ contact.id }}">Delete</a>
                 </td>
               {% else %}
               {% endif %}

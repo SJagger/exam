@@ -1,15 +1,9 @@
-import csv
-import io
-
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.decorators import permission_required
 from django.contrib import messages
 
 from .models import AddressBookList
 
-@permission_required('admin.can_add_log_entry')
 
 @login_required
 def home(request):
