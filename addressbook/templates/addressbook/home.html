@@ -27,6 +27,7 @@
       <h1>Address Book List</h1>
       {% if user.is_authenticated %}
         <a class="btn btn-primary" href="/add_contact/">Add</a><br><br>
+        <a class="btn btn-success" href="/upload-csv/">CSV Import</a><br><br>
       {% else %}
       {% endif %}
     </div>

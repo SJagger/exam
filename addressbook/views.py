@@ -1,5 +1,8 @@
+import io
+import csv
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
 from django.contrib import messages
 from .models import AddressBookList
 
@@ -46,3 +49,32 @@ def update_contact(request, id):
     contacts.address = request.GET['address']
     contacts.save()
     return redirect('/')
+
+@permission_required('admin.can_add_log_entry')
+def contact_upload(request):
+    template = "addressbook/contact_upload.html"
+
+    prompt = {
+        'order': 'Order of the CSV should be fname, lname, cnumber, address'
+    }
+
+    if request.method == "GET":
+        return render(request, template, prompt)
+    csv_file = request.FILES['file']
+
+    if not csv_file.name.endswith('.csv'):
+        message.error(request, 'This is not a csv file', extra_tags='excel')
+
+    data_set = csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimeter=',', quotechar="|"):
+        _, created = Contact.objects.update_or_create(
+            fname=column[0],
+            lname=column[1],
+            cnumber=column[2],
+            address=volumn[3]
+        )
+
+    context = {}
+    return render(request, template, context)
